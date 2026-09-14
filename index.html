@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maaf ya...</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* CSS Hati Berguguran */
+    .heart {
+      position: fixed;
+      top: -10vh;
+      color: #ff4d6d;
+      font-size: 20px;
+      user-select: none;
+      pointer-events: none;
+      animation: fall linear forwards;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(105vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Card Utama */
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 35px 25px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      backdrop-filter: blur(5px);
+    }
+
+    h1 {
+      color: #e63946;
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #4a4a4a;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    /* Container Tombol */
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      min-height: 60px;
+      position: relative;
+    }
+
+    button {
+      padding: 12px 28px;
+      border: none;
+      border-radius: 25px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .btn-maaf {
+      background-color: #ff4d6d;
+      color: white;
+      box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+    }
+
+    .btn-maaf:hover {
+      background-color: #c9184a;
+      transform: scale(1.1);
+    }
+
+    .btn-enggak {
+      background-color: #8d99ae;
+      color: white;
+      position: absolute;
+      transition: all 0.15s ease-out;
+    }
+
+    /* Pesan Rahasia */
+    #pesan-rahasia {
+      display: none;
+      margin-top: 25px;
+      padding: 15px;
+      background-color: #ffe6e9;
+      border-radius: 12px;
+      color: #c9184a;
+      font-weight: bold;
+      line-height: 1.5;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10deg); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>akuu minta maaff yaa bebee... ❤️</h1>
+    <p>aku tau pasti kamuu sebell banget karena kelakuan aku. maafinn aku yaa?</p>
+    
+    <div class="btn-group" id="container-tombol">
+      <button class="btn-maaf" onclick="maafin()">Maafin Aku</button>
+      <button class="btn-enggak" id="btnEnggak" onmouseover="kabur()" onclick="kabur()">Enggak</button>
+    </div>
+
+    <div id="pesan-rahasia">
+      trimakasii udaa dimaafinn bebee! 🥹❤️<br>
+      i loveeee uuuu so much sayangggkuu cintaakuu cantikknyaa akuuu! ❤️
+    </div>
+  </div>
+
+  <script>
+    // Fitur Animasi Love Berguguran
+    function buatHati() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+      heart.style.fontSize = Math.random() * 15 + 15 + 'px';
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+    setInterval(buatHati, 300);
+
+    // Fitur Tombol "Enggak" Kabur
+    const btnEnggak = document.getElementById('btnEnggak');
+    
+    function kabur() {
+      // Menghitung posisi acak di layar
+      const x = Math.random() * (window.innerWidth - btnEnggak.offsetWidth - 40);
+      const y = Math.random() * (window.innerHeight - btnEnggak.offsetHeight - 40);
+      
+      btnEnggak.style.position = 'fixed';
+      btnEnggak.style.left = `${x}px`;
+      btnEnggak.style.top = `${y}px`;
+    }
+
+    // Fungsi Saat Pilih "Maafin Aku"
+    function maafin() {
+      document.getElementById('pesan-rahasia').style.display = 'block';
+      document.getElementById('container-tombol').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
